@@ -40,4 +40,28 @@ body {
   font-size: 28px;
   margin: 30px 0;
 }
+
+// success toast
+.b-toast-success {
+    & .toast {
+      background-color: #fff;
+      border-color: #409d35;
+    }
+
+    & .toast .toast-header {
+      background-color: #fff;
+      border: 0;
+
+      & > strong {
+        font-size: 16px;
+        text-transform: uppercase;
+        color: #409d35;
+      }
+    }
+
+    & .toast .toast-body {
+      padding: 0.25rem 0.75rem 0.75rem;
+      color: #202020;
+    }
+}
 </style>

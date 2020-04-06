@@ -4,7 +4,8 @@ export default {
     namespaced: true,
     state: {
         lessons:[],
-        loading: false
+        loading: false,
+        lessonsDetails: {}
     },
     // getters are used to get state data 
     getters: {
@@ -22,6 +23,9 @@ export default {
         },
         toggleLoader( state, payload ) {
             return state.loading = payload
+        },
+        setLessonsDetails( state, payload ) {
+            return state.lessonsDetails = payload
         }
     },
     // actions are used to perform async operations
@@ -33,13 +37,16 @@ export default {
             // to make delay in response
             setTimeout(() => {
                 API.fetchProducts().then( data => {
-                    //context.state.lessons = data[0]['lessons']; // bad practice
+                    // context.state.lessons = data[0]['lessons']; // bad practice
                     context.commit('setLessons', data[0]['lessons']); // good practice 
                     
                     // to show loader
                     context.commit('toggleLoader', false);                                       
                 });
             }, 2000);            
+        },
+        fetchLessonsDetails(context, payload) {
+            context.commit('setLessonsDetails', payload);
         }
     }
 }

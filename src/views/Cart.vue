@@ -60,7 +60,7 @@
         </ul>
       </b-col>
     </b-row>
-  </div>
+  </div>  
 </template>
 
 <script>
@@ -104,7 +104,7 @@ export default {
   },
   filters: {
     INR( value ) {
-      if (!value) return ''
+      if (!value) return '0.00'
       return 'INR' + ' ' + parseFloat(value).toFixed(2);
     },
     toDecimal( value ) {

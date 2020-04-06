@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Shop from '../views/Shop.vue'
+import Detail from '../views/Detail.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Shop',
     component: Shop
+  },
+  {
+    path: '/course/:id',
+    name: 'Detail',
+    component: Detail
   },
   {
     path: '/cart',
