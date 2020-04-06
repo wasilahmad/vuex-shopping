@@ -13,21 +13,21 @@ export default {
             for( let i=0; i < tempCart.length; i++ ) {
               subTotal += tempCart[i].price * tempCart[i].quantity;
             }
-            return parseFloat(subTotal).toFixed(2) // to convert two digit decimal value
+            return subTotal
         },
         getTax( state, getters ) {            
             const tempTax = getters.getSubTotal;
             const tax = tempTax * 0.05; // 5% tax on each item
-            return parseFloat(tax).toFixed(2);
+            return tax
         },
         getShippingCharge( state ) {
             const tempCart = state.cart;
             const charges = tempCart.length * 50; // 50 per item
-            return parseFloat(charges).toFixed(2);
+            return charges
         },
         getTotal( state, getters ) {
             const total = getters.getSubTotal + getters.getTax + getters.getShippingCharge
-            return parseFloat(total).toFixed(2); 
+            return total
         }
     },
     mutations: {

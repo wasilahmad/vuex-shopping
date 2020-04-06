@@ -27,7 +27,7 @@
                 <img :src="item.image" :alt="item.name" style="width:80px">
               </div>
               <div class="grid-cell">{{ item.name }}</div>
-              <div class="grid-cell text-center">{{ item.price }}</div>
+              <div class="grid-cell text-center">{{ item.price | INR}}</div>
               <div class="grid-cell text-center">
                 <b-input-group class="input-group-counter">
                   <b-input-group-prepend>
@@ -39,7 +39,7 @@
                   </b-input-group-append>
                 </b-input-group>
               </div>
-              <div class="grid-cell text-center">{{ item.price * item.quantity }}</div>              
+              <div class="grid-cell text-center">{{ item.price * item.quantity | INR }}</div>              
               <div class="grid-cell text-center">
                 <b-icon icon="trash" @click="removeItem(item)" style="width: 20px; height: 20px; cursor:pointer"></b-icon>
               </div>
@@ -50,10 +50,10 @@
       <b-col cols="12" lg="3">
         <ul class="list-group">
           <li class="list-group-item active">Cart Totals</li>
-          <li class="list-group-item">Sub Total: <span class="ml-auto">{{ subTotal }}</span></li>
-          <li class="list-group-item">Taxes: <span class="ml-auto">{{ tax }}</span></li>
-          <li class="list-group-item">Shipping Charges: <span class="ml-auto">{{ shippingCharge }}</span></li>
-          <li class="list-group-item">Total: <span class="ml-auto">{{ total }}</span></li>
+          <li class="list-group-item">Sub Total <span class="ml-auto">{{ subTotal | toDecimal}}</span></li>
+          <li class="list-group-item">Taxes <span class="ml-auto">{{ tax | toDecimal}}</span></li>
+          <li class="list-group-item">Shipping Charge <span class="ml-auto">{{ shippingCharge | toDecimal }}</span></li>
+          <li class="list-group-item">Total <span class="ml-auto">{{ total | toDecimal }}</span></li>
           <li class="list-group-item">
             <b-button variant="success" class="btn-block">Proceed To Checkout</b-button>
           </li>
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     ...mapState({
-      cartItemsLength: state => state.cart['cart'].length
+      totalCartItems: state => state.cart['cart'].length
     }),
     ...mapGetters({
       cartItems: 'cart/getCartItems',
@@ -100,6 +100,16 @@ export default {
       } else {
         this.$store.commit('cart/removeCartItem', payload);
       }
+    }
+  },
+  filters: {
+    INR( value ) {
+      if (!value) return ''
+      return 'INR' + ' ' + parseFloat(value).toFixed(2);
+    },
+    toDecimal( value ) {
+      if (!value) return '0.00'
+      return parseFloat(value).toFixed(2);
     }
   }
 }
@@ -152,6 +162,7 @@ export default {
     text-align: center;
   }
 }
+
 .bi-trash {
   &:hover {
     color: red;
