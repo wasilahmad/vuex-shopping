@@ -33,13 +33,13 @@
                   <b-input-group-prepend>
                     <b-button variant="secondary">-</b-button>
                   </b-input-group-prepend>
-                  <b-form-input type="number" min="0"></b-form-input>
+                  <b-form-input type="number" min="0" :value="item.quantity"></b-form-input>
                   <b-input-group-append>
                     <b-button variant="secondary">+</b-button>
                   </b-input-group-append>
                 </b-input-group>
               </div>
-              <div class="grid-cell text-center">122</div>              
+              <div class="grid-cell text-center">{{ item.price * item.quantity }}</div>              
               <div class="grid-cell">
                 <b-icon icon="trash" @click="removeItem(item)" style="width: 20px; height: 20px; cursor:pointer"></b-icon>
               </div>
@@ -68,6 +68,11 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Cart',
+  data(){
+    return {
+
+    }
+  },
   computed: {
     ...mapState({
       cartItemsLength: state => state.cart.length
@@ -82,7 +87,7 @@ export default {
       const tempCart = this.cartItems;
       let subTotal = 0;
       for( let i=0; i < tempCart.length; i++) {
-        subTotal += tempCart[i].price;
+        subTotal += tempCart[i].price * tempCart[i].quantity;
       }
       return parseFloat(subTotal).toFixed(2) // to convert two digit decimal value
     },

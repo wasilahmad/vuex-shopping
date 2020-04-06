@@ -27,6 +27,7 @@ export default {
   methods: {
     addToCart(payload) {
       console.log('item click', payload)
+      //debugger
       this.$store.commit('cart/addCartItem', payload);
     }
   }

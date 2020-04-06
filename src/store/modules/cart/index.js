@@ -10,8 +10,16 @@ export default {
     },
     mutations: {
         addCartItem( state, payload ) {
-            if(payload) {
-                state.cart.push(payload);
+            const existingCartItem = state.cart.find( item => item.id === payload.id);
+            // to check whether selected item is present or not
+            if(state.cart.indexOf(existingCartItem) === -1) {
+                state.cart.push({...payload, quantity: 1});
+            } else {
+                //console.log('existingCartItem', existingCartItem)
+                // if item is already exist then only change its quantity
+                state.cart.find( item => {
+                    item.id === payload.id ? item.quantity++ : null
+                });
             }
         },
         removeCartItem( state, payload ) {
