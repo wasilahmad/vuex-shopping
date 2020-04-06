@@ -50,10 +50,10 @@
       <b-col cols="12" lg="3">
         <ul class="list-group">
           <li class="list-group-item active">Cart Totals</li>
-          <li class="list-group-item">Sub Total: <span class="ml-auto">{{ calcSubTotal }}</span></li>
-          <li class="list-group-item">Taxes: <span class="ml-auto">{{ calcTax }}</span></li>
-          <li class="list-group-item">Shipping Charges: <span class="ml-auto">{{ calcShippingCharge }}</span></li>
-          <li class="list-group-item">Total: <span class="ml-auto">{{ calcTotal }}</span></li>
+          <li class="list-group-item">Sub Total: <span class="ml-auto">{{ subTotal }}</span></li>
+          <li class="list-group-item">Taxes: <span class="ml-auto">{{ tax }}</span></li>
+          <li class="list-group-item">Shipping Charges: <span class="ml-auto">{{ shippingCharge }}</span></li>
+          <li class="list-group-item">Total: <span class="ml-auto">{{ total }}</span></li>
           <li class="list-group-item">
             <b-button variant="success" class="btn-block">Proceed To Checkout</b-button>
           </li>
@@ -70,7 +70,6 @@ export default {
   name: 'Cart',
   data(){
     return {
-
     }
   },
   computed: {
@@ -79,30 +78,14 @@ export default {
     }),
     ...mapGetters({
       cartItems: 'cart/getCartItems',
+      subTotal: 'cart/getSubTotal',
+      tax: 'cart/getTax',
+      shippingCharge: 'cart/getShippingCharge',
+      total: 'cart/getTotal'
     }),
     // cartItems() {
     //   return this.$store.getters['cart/getCartItems'];
-    // },
-    calcSubTotal(){
-      const tempCart = this.cartItems;
-      let subTotal = 0;
-      for( let i=0; i < tempCart.length; i++) {
-        subTotal += tempCart[i].price * tempCart[i].quantity;
-      }
-      return parseFloat(subTotal).toFixed(2) // to convert two digit decimal value
-    },
-    calcTax() {
-      const tempTax = this.calcSubTotal;
-      const tax = tempTax * 0.1; // 10% tax on each item
-      return parseFloat(tax).toFixed(2);
-    },
-    calcShippingCharge() {
-      return parseInt(this.calcSubTotal) ? parseFloat(100).toFixed(2) : parseFloat(0).toFixed(2);
-    },
-    calcTotal() {
-      let total = parseInt(this.calcSubTotal) + parseInt(this.calcTax) + parseInt(this.calcShippingCharge);
-      return parseFloat(total).toFixed(2);
-    }
+    // }   
   },
   methods: {
     removeItem( payload ) {
@@ -164,9 +147,14 @@ export default {
 .input-group-counter {
   width: 110px;
   margin: 0 auto;
-  
+
   & .form-control {
     text-align: center;
+  }
+}
+.bi-trash {
+  &:hover {
+    color: red;
   }
 }
 </style>
