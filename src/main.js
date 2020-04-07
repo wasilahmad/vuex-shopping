@@ -14,6 +14,12 @@ Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
 
+// INR global filter
+Vue.filter('INR', function (value) {
+  if (!value) return '0.00'
+  return 'INR' + ' ' + parseFloat(value).toFixed(2);
+})
+
 new Vue({
   router,
   store,

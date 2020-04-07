@@ -18,7 +18,7 @@
                     <p><strong>Author:</strong> {{ product.author }}</p>
                     <p><strong>Duration:</strong> {{ product.duration }}</p>
                     <p><strong>Published On:</strong> {{ product.publishDate }}</p>
-                    <p><strong>Price:</strong> INR {{ product.price }}</p>
+                    <p><strong>Price:</strong> {{ product.price | INR}}</p>
                 </div>
                 <div class="btn-actions">
                     <b-button @click="addToCart" variant="primary">Add To Cart</b-button>

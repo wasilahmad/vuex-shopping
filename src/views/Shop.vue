@@ -5,10 +5,10 @@
         <h1 class="page-title">Shopping</h1>
       </b-col>
     </b-row>
-    
-    <h2 v-show="isLoading">Loading...</h2>
 
-    <b-row v-if="!isLoading">
+    <Loader :isVisible="isLoading" position="center"/>
+    
+    <b-row v-show="!isLoading" class="animate-from-bottom">
       <b-col cols="12" sm="6" md="4" lg="3" v-for="lesson in lessonsList" :key="lesson.id">        
         <ProductCard :data="lesson"/>
       </b-col>
@@ -19,6 +19,7 @@
 <script>
 // @ is an alias to /src
 import ProductCard from '@/components/ProductCard.vue'
+import Loader from '@/components/Loader.vue'
 
 import store from '@/store'
 import { mapGetters } from 'vuex'
@@ -30,7 +31,8 @@ export default {
     }
   },
   components: {
-    ProductCard
+    ProductCard,
+    Loader
   },
   computed: {
     ...mapGetters({
@@ -53,3 +55,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+/* Add animation to "page content" */
+.animate-from-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+</style>

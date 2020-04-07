@@ -89,7 +89,29 @@ export default {
   },
   methods: {
     removeItem( payload ) {
-      return this.$store.commit('cart/removeCartItem', payload);
+        this.$bvModal.msgBoxConfirm('Are you sure you want to delete cart item?', {
+          title: 'Please Confirm',
+          size: 'md',
+          buttonSize: 'md',
+          okVariant: 'primary',
+          okTitle: 'YES',
+          cancelTitle: 'NO',
+          footerClass: 'p-2',
+          hideHeaderClose: false,
+          centered: false
+        })
+        .then(value => {
+          // console.log('modal success', value)
+          if(value){
+            this.$store.commit('cart/removeCartItem', payload);
+          }
+        })
+        .catch(err => {
+          // An error occurred
+          console.log('modal error', err)
+        })
+
+      // return this.$store.commit('cart/removeCartItem', payload);
     },
     increaseQuantity( payload ) {
       return payload.quantity += 1
@@ -98,15 +120,12 @@ export default {
       if(payload.quantity > 1) {
         payload.quantity -= 1
       } else {
-        this.$store.commit('cart/removeCartItem', payload);
+        // this.$store.commit('cart/removeCartItem', payload);
+        this.removeItem(payload);
       }
     }
   },
-  filters: {
-    INR( value ) {
-      if (!value) return '0.00'
-      return 'INR' + ' ' + parseFloat(value).toFixed(2);
-    },
+  filters: {    
     toDecimal( value ) {
       if (!value) return '0.00'
       return parseFloat(value).toFixed(2);
