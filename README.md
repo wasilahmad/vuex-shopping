@@ -1,5 +1,5 @@
 # vuex-shopping
-[Live:](https://vuex-shopping-demo.netlify.com/)
+[Live: https://vuex-shopping-demo.netlify.com](https://vuex-shopping-demo.netlify.com/)
 
 
 ## Project setup
