@@ -110,15 +110,14 @@ export default {
           // An error occurred
           console.log('modal error', err)
         })
-
       // return this.$store.commit('cart/removeCartItem', payload);
     },
     increaseQuantity( payload ) {
-      return payload.quantity += 1
+      return this.$store.commit('cart/increamentItem', payload);
     },
     decreaseQuantity( payload ) {
       if(payload.quantity > 1) {
-        payload.quantity -= 1
+         this.$store.commit('cart/decreamentItem', payload);
       } else {
         // this.$store.commit('cart/removeCartItem', payload);
         this.removeItem(payload);

@@ -28,6 +28,9 @@ export default {
         getTotal( state, getters ) {
             const total = getters.getSubTotal + getters.getTax + getters.getShippingCharge
             return total
+        },
+        getTotalCartItems( state ) {
+            return state.cart.reduce((acc, obj) => acc += obj.quantity, 0)
         }
     },
     mutations: {
@@ -49,6 +52,20 @@ export default {
         removeCartItem( state, payload ) {
             const index = state.cart.findIndex( item => item.id === payload.id);            
             state.cart.splice(index, 1);
+        },
+        increamentItem( state, payload ) {
+            state.cart.find( item => {
+                if(item.id === payload.id){
+                    item.quantity += 1 
+                } 
+            });
+        },
+        decreamentItem( state, payload ) {
+            state.cart.find( item => {
+                if(item.id === payload.id){
+                    item.quantity -= 1
+                } 
+            });
         }
     },
     actions: {

@@ -5,24 +5,27 @@
         <b-collapse id="nav-text-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
             <b-nav-item to="/">Shop</b-nav-item>
-            <b-nav-item to="/cart">Cart <b-badge variant="light">{{ cartLength }}</b-badge></b-nav-item>
+            <b-nav-item to="/cart">Cart <b-badge variant="light">{{ totalCartItems }}</b-badge></b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'Header',
     computed: {
         ...mapState({
             cartLength: state => state.cart['cart'].length
+        }),
+        ...mapGetters({
+            totalCartItems: 'cart/getTotalCartItems'
         })
     },
     created() {
-        this.cartLength
+      // console.log('cart length', this.cartLength);
     }
 }
 </script>
