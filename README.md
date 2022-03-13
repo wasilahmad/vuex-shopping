@@ -1,6 +1,8 @@
 # vuex-shopping
 [Live: https://vuex-shopping-demo.netlify.com](https://vuex-shopping-demo.netlify.com/)
 
+![Screenshot](https://github.com/wasilahmad/vuex-shopping/blob/master/public/vuex-e-commerce-app.png 'Tutorial Screenshot')
+
 
 ## Project setup
 ```
